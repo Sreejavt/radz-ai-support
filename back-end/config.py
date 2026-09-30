@@ -1,4 +1,4 @@
-frontend_base_url = "http://localhost:5173"
+frontend_base_url = "https://radz-ai-support.vercel.app"
 # Resend's sandbox sender. Works for testing (delivers only to the email
 # your Resend account was signed up with). Once a real domain is verified
 # for a client, this becomes something like "ABC Company <support@clientdomain.com>".

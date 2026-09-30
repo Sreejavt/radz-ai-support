@@ -1,6 +1,6 @@
 // Change this if your FastAPI backend runs somewhere other than the
 // default `uvicorn api:app --reload` address.
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "https://radz-ai-support.onrender.com";
 
 async function postJSON(path, body) {
   const response = await fetch(`${BASE_URL}${path}`, {
