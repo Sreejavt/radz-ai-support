@@ -1,0 +1,52 @@
+{
+  "transactions": [
+    {
+      "order_id": "ORD-000001",
+      "customer_id": "CUS-000001",
+      "amount": 2499.0,
+      "details": "Wireless noise-cancelling headphones",
+      "transaction_date": "2026-09-15",
+      "status": "Completed"
+    },
+    {
+      "order_id": "ORD-000002",
+      "customer_id": "CUS-000002",
+      "amount": 899.0,
+      "details": "Cotton bedsheet set (queen size)",
+      "transaction_date": "2026-05-10",
+      "status": "Completed"
+    },
+    {
+      "order_id": "ORD-000003",
+      "customer_id": "CUS-000003",
+      "amount": 1599.0,
+      "details": "Stainless steel cookware set",
+      "transaction_date": "2026-09-20",
+      "status": "Completed"
+    },
+    {
+      "order_id": "ORD-000004",
+      "customer_id": "CUS-000004",
+      "amount": 3299.0,
+      "details": "Smartwatch, fitness edition",
+      "transaction_date": "2026-09-25",
+      "status": "Completed"
+    },
+    {
+      "order_id": "ORD-000005",
+      "customer_id": "CUS-000005",
+      "amount": 649.0,
+      "details": "Organic skincare gift set",
+      "transaction_date": "2026-09-28",
+      "status": "Completed"
+    },
+    {
+      "order_id": "ORD-000006",
+      "customer_id": "CUS-000001",
+      "amount": 1299.0,
+      "details": "Bluetooth portable speaker",
+      "transaction_date": "2026-09-27",
+      "status": "Completed"
+    }
+  ]
+}

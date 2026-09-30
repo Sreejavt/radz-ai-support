@@ -1,0 +1,28 @@
+{
+  "tickets": [
+    {
+      "ticket_id": "TKT-A1B2C3D4",
+      "customer_id": "CUS-000002",
+      "customer_name": "Arjun Menon",
+      "issue": "Bedsheet set arrived with a tear in the packaging",
+      "status": "Open",
+      "created_at": "2026-09-18T11:20:00.000000"
+    },
+    {
+      "ticket_id": "TKT-E5F6A7B8",
+      "customer_id": "CUS-000004",
+      "customer_name": "David Chen",
+      "issue": "Smartwatch shipment delayed beyond estimated delivery date",
+      "status": "Open",
+      "created_at": "2026-09-26T09:45:00.000000"
+    },
+    {
+      "ticket_id": "TKT-C9D0E1F2",
+      "customer_id": "CUS-000001",
+      "customer_name": "Priya Nair",
+      "issue": "Asked about warranty coverage for headphones",
+      "status": "Resolved",
+      "created_at": "2026-09-16T14:10:00.000000"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "complaints": [
+    {
+      "customer_id": "CUS-000002",
+      "complaint_id": "CMP-11223344",
+      "customer_name": "Arjun Menon",
+      "complaint": "Bedsheet set arrived damaged, packaging was torn",
+      "status": "Open",
+      "created_at": "2026-09-19T10:05:00.000000"
+    },
+    {
+      "customer_id": "CUS-000003",
+      "complaint_id": "CMP-55667788",
+      "customer_name": "Fatima Rahman",
+      "complaint": "Received the wrong item — ordered a 5-piece cookware set, got a 3-piece set",
+      "status": "Open",
+      "created_at": "2026-09-21T16:30:00.000000"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "payments": [
+    {
+      "customer_id": "CUS-000005",
+      "order_id": "ORD-000005",
+      "amount": 649.0,
+      "status": "Failed",
+      "actual_status": "Completed",
+      "created_at": "2026-09-29T09:10:00.000000"
+    }
+  ]
+}

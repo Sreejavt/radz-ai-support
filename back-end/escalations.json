@@ -1,0 +1,12 @@
+{
+  "escalations": [
+    {
+      "escalation_id": "ESC-99887766",
+      "customer_name": "Arjun Menon",
+      "issue": "Customer support issue",
+      "reason": "Filed a ticket and a complaint about the damaged bedsheet order, no resolution after several days",
+      "status": "Open",
+      "created_at": "2026-09-24T13:15:00.000000"
+    }
+  ]
+}

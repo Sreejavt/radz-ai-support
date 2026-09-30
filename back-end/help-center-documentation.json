@@ -1,0 +1,122 @@
+[
+  {
+    "id": "orders-delivery",
+    "title": "Orders & Delivery",
+    "icon": "📦",
+    "summary": "Track an order, report an order issue, or get help with delivery.",
+    "articles": [
+      {
+        "title": "How can I check my order status?",
+        "content": "Use the Support Assistant and provide the order ID to check the latest order status."
+      },
+      {
+        "title": "What if there is a delivery issue?",
+        "content": "Provide the order ID and describe the delivery problem. Support can record the issue and assist with next steps."
+      },
+      {
+        "title": "Can I get help with a delayed order?",
+        "content": "Provide the order ID and explain that the order is delayed. The Support Assistant can check the available order information."
+      }
+    ]
+  },
+  {
+    "id": "returns-refunds",
+    "title": "Returns & Refunds",
+    "icon": "↩",
+    "summary": "Get help with returns, refund requests, and refund status.",
+    "articles": [
+      {
+        "title": "How do I request a refund?",
+        "content": "Use the Support Assistant to request a refund. The order must be verified before the refund request can be created."
+      },
+      {
+        "title": "How can I check my refund status?",
+        "content": "Provide the order ID or refund information to check the current refund status."
+      },
+      {
+        "title": "What if the refund amount is incorrect?",
+        "content": "The Support Assistant verifies the transaction amount before creating a refund request."
+      }
+    ]
+  },
+  {
+    "id": "payments",
+    "title": "Payments",
+    "icon": "▣",
+    "summary": "Resolve payment-related issues or get help with a payment problem.",
+    "articles": [
+      {
+        "title": "What if my payment has a problem?",
+        "content": "Provide the related order ID, if available, and describe what happened. A support ticket can be created for the issue."
+      },
+      {
+        "title": "What information is needed for a payment issue?",
+        "content": "The order ID and a brief description of the payment problem help support investigate the issue."
+      },
+      {
+        "title": "Can I get human help with a payment issue?",
+        "content": "Yes. The Support Assistant can create a support ticket for a payment issue so that a human representative can assist."
+      }
+    ]
+  },
+  {
+    "id": "account-login",
+    "title": "Account & Login",
+    "icon": "◉",
+    "summary": "Manage account issues, login problems, and password resets.",
+    "articles": [
+      {
+        "title": "I cannot access my account",
+        "content": "Provide the customer ID, email, or phone number and describe the account issue. Support can record the issue for assistance."
+      },
+      {
+        "title": "How do I reset my password?",
+        "content": "Use the Support Assistant to start the password-reset process. A secure reset link can be provided when the customer identity is verified."
+      },
+      {
+        "title": "What if my account is locked?",
+        "content": "Provide the customer details and explain that the account is locked. The Support Assistant can record the account issue for support."
+      }
+    ]
+  },
+  {
+    "id": "complaints-issues",
+    "title": "Complaints & Issues",
+    "icon": "!",
+    "summary": "Raise a complaint or report a problem that needs attention.",
+    "articles": [
+      {
+        "title": "How do I raise a complaint?",
+        "content": "Use the Support Assistant and choose to make a complaint. Provide the customer details and describe the complaint."
+      },
+      {
+        "title": "How can I escalate an issue?",
+        "content": "Describe the issue and explain why it needs escalation. The Support Assistant can create an escalation record."
+      },
+      {
+        "title": "Can I check my complaint status?",
+        "content": "Provide the complaint ID to check the current complaint status."
+      }
+    ]
+  },
+  {
+    "id": "contact-support",
+    "title": "Contact Support",
+    "icon": "?",
+    "summary": "Need further assistance? Our support assistant can help with your request.",
+    "articles": [
+      {
+        "title": "How can I contact support?",
+        "content": "Open the Support Assistant using the floating support button or the Open Support button."
+      },
+      {
+        "title": "What can the Support Assistant help with?",
+        "content": "The Support Assistant can answer support questions, check records, create tickets, handle refund requests, record complaints, and create escalations."
+      },
+      {
+        "title": "When should I request human assistance?",
+        "content": "If an issue requires human attention, the Support Assistant can create a support ticket or escalation where appropriate."
+      }
+    ]
+  }
+]

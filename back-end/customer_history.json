@@ -1,0 +1,165 @@
+{
+  "history": [
+    {
+      "customer_id": "CUS-000001",
+      "event_type": "customer_created",
+      "details": "Customer account created: Priya Nair",
+      "event_date": "2026-06-01",
+      "created_at": "2026-06-01T10:00:00.000000"
+    },
+    {
+      "customer_id": "CUS-000002",
+      "event_type": "customer_created",
+      "details": "Customer account created: Arjun Menon",
+      "event_date": "2026-04-20",
+      "created_at": "2026-04-20T09:30:00.000000"
+    },
+    {
+      "customer_id": "CUS-000003",
+      "event_type": "customer_created",
+      "details": "Customer account created: Fatima Rahman",
+      "event_date": "2026-07-05",
+      "created_at": "2026-07-05T12:15:00.000000"
+    },
+    {
+      "customer_id": "CUS-000004",
+      "event_type": "customer_created",
+      "details": "Customer account created: David Chen",
+      "event_date": "2026-08-01",
+      "created_at": "2026-08-01T15:45:00.000000"
+    },
+    {
+      "customer_id": "CUS-000005",
+      "event_type": "customer_created",
+      "details": "Customer account created: Meera Iyer",
+      "event_date": "2026-09-10",
+      "created_at": "2026-09-10T11:00:00.000000"
+    },
+    {
+      "customer_id": "CUS-000002",
+      "event_type": "purchase",
+      "details": "Order ORD-000002 for 899.0",
+      "event_date": "2026-05-10",
+      "created_at": "2026-05-10T14:20:00.000000"
+    },
+    {
+      "customer_id": "CUS-000002",
+      "event_type": "status_changed",
+      "details": "Customer status changed to Inactive",
+      "event_date": "2026-08-09",
+      "created_at": "2026-08-09T00:05:00.000000"
+    },
+    {
+      "customer_id": "CUS-000001",
+      "event_type": "purchase",
+      "details": "Order ORD-000001 for 2499.0",
+      "event_date": "2026-09-15",
+      "created_at": "2026-09-15T16:00:00.000000"
+    },
+    {
+      "customer_id": "CUS-000001",
+      "event_type": "ticket_created",
+      "details": "Ticket TKT-C9D0E1F2 created: Asked about warranty coverage for headphones",
+      "event_date": "2026-09-16",
+      "created_at": "2026-09-16T14:10:00.000000"
+    },
+    {
+      "customer_id": "CUS-000001",
+      "event_type": "ticket_status_changed",
+      "details": "Ticket TKT-C9D0E1F2 status changed to Resolved",
+      "event_date": "2026-09-17",
+      "created_at": "2026-09-17T09:00:00.000000"
+    },
+    {
+      "customer_id": "CUS-000002",
+      "event_type": "ticket_created",
+      "details": "Ticket TKT-A1B2C3D4 created: Bedsheet set arrived with a tear in the packaging",
+      "event_date": "2026-09-18",
+      "created_at": "2026-09-18T11:20:00.000000"
+    },
+    {
+      "customer_id": "CUS-000002",
+      "event_type": "complaint_created",
+      "details": "Complaint CMP-11223344 filed: Bedsheet set arrived damaged, packaging was torn",
+      "event_date": "2026-09-19",
+      "created_at": "2026-09-19T10:05:00.000000"
+    },
+    {
+      "customer_id": "CUS-000003",
+      "event_type": "purchase",
+      "details": "Order ORD-000003 for 1599.0",
+      "event_date": "2026-09-20",
+      "created_at": "2026-09-20T13:00:00.000000"
+    },
+    {
+      "customer_id": "CUS-000002",
+      "event_type": "account_issue_created",
+      "details": "Account issue reported: Profile email address is outdated and customer can't update it themselves",
+      "event_date": "2026-09-20",
+      "created_at": "2026-09-20T15:00:00.000000"
+    },
+    {
+      "customer_id": "CUS-000003",
+      "event_type": "complaint_created",
+      "details": "Complaint CMP-55667788 filed: Received the wrong item — ordered a 5-piece cookware set, got a 3-piece set",
+      "event_date": "2026-09-21",
+      "created_at": "2026-09-21T16:30:00.000000"
+    },
+    {
+      "customer_id": "CUS-000002",
+      "event_type": "escalation_created",
+      "details": "Escalation ESC-99887766 raised: Filed a ticket and a complaint about the damaged bedsheet order, no resolution after several days",
+      "event_date": "2026-09-24",
+      "created_at": "2026-09-24T13:15:00.000000"
+    },
+    {
+      "customer_id": "CUS-000002",
+      "event_type": "refund_requested",
+      "details": "Refund requested for order ORD-000002: 899.0 (Item arrived damaged)",
+      "event_date": "2026-09-24",
+      "created_at": "2026-09-24T13:20:00.000000"
+    },
+    {
+      "customer_id": "CUS-000004",
+      "event_type": "purchase",
+      "details": "Order ORD-000004 for 3299.0",
+      "event_date": "2026-09-25",
+      "created_at": "2026-09-25T10:30:00.000000"
+    },
+    {
+      "customer_id": "CUS-000004",
+      "event_type": "ticket_created",
+      "details": "Ticket TKT-E5F6A7B8 created: Smartwatch shipment delayed beyond estimated delivery date",
+      "event_date": "2026-09-26",
+      "created_at": "2026-09-26T09:45:00.000000"
+    },
+    {
+      "customer_id": "CUS-000004",
+      "event_type": "account_issue_created",
+      "details": "Account issue reported: Account locked after multiple failed login attempts",
+      "event_date": "2026-09-27",
+      "created_at": "2026-09-27T08:30:00.000000"
+    },
+    {
+      "customer_id": "CUS-000001",
+      "event_type": "purchase",
+      "details": "Order ORD-000006 for 1299.0",
+      "event_date": "2026-09-27",
+      "created_at": "2026-09-27T17:00:00.000000"
+    },
+    {
+      "customer_id": "CUS-000005",
+      "event_type": "purchase",
+      "details": "Order ORD-000005 for 649.0",
+      "event_date": "2026-09-28",
+      "created_at": "2026-09-28T12:00:00.000000"
+    },
+    {
+      "customer_id": "CUS-000005",
+      "event_type": "payment_issue_created",
+      "details": "Payment issue reported for order ORD-000005: customer reported Failed, transaction shows Completed",
+      "event_date": "2026-09-29",
+      "created_at": "2026-09-29T09:10:00.000000"
+    }
+  ]
+}

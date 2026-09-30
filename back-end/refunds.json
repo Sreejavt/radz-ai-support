@@ -1,0 +1,12 @@
+{
+  "refunds": [
+    {
+      "customer_id": "CUS-000002",
+      "order_id": "ORD-000002",
+      "reason": "Item arrived damaged",
+      "amount": 899.0,
+      "status": "Requested",
+      "created_at": "2026-09-24T13:20:00.000000"
+    }
+  ]
+}

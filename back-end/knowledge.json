@@ -1,0 +1,139 @@
+{
+    "business hours": {
+        "keywords": [
+            "business hours",
+            "open",
+            "working hours",
+            "office hours",
+            "close",
+            "reach", "business hrs", "office hrs", "working hrs"
+        ],
+        "answer": "We are open Monday to Friday from 9:00 AM to 6:00 PM."
+    },
+
+    "contact": {
+        "keywords": [
+            "contact",
+            "email",
+            "phone",
+            "connect",
+            "get in touch"
+        ],
+        "answer": "You can contact us by email or phone."
+    },
+
+   "pricing": {
+        "keywords": [
+            "pricing",
+            "price",
+            "cost",
+            "fees",
+            "charge"
+        ],
+        "answer": "Please contact our sales team for pricing information."
+    },
+
+    "refund": {
+        "keywords" : [
+            "refund", "money back", "return", "get back my money", "get back my amount", "get back my paid amount"
+        ],
+        "answer" : "refunds are accepted within 30 days."
+    },
+    
+    "appointment": {
+        "keywords": [
+        "appointment", "visit"
+        ],
+        "answer" : "Appointments can be booked through our website."
+    },
+    
+    "location": {
+        "keywords": [
+            "office", "location","from where do you function", "from where do you operate", "address", "where are you located"
+        ],
+        "answer" : "Our office location is available on our website."
+
+    },
+    
+    "shipping": {
+        "keywords" : [
+            "ship", "shipping", "delivery"
+        ],
+        "answer" : "Shipping takes 3–5 business days."
+    },
+
+    "payment methods": {
+        "keywords": [
+            "payment", "pay"
+        ],
+        "answer": "We accept credit cards, debit cards, and bank transfers."
+    },
+
+    "payment failure": {
+    "keywords": [
+        "payment failed",
+        "payment failure",
+        "failed payment",
+        "payment didn't go through",
+        "payment not successful",
+        "payment declined",
+        "card declined"
+    ],
+    "answer": "If your payment fails, please try again or contact our support team for assistance."
+},
+
+    "billing information": {
+        "keywords": [
+            "billing",
+            "billing information",
+            "billing details",
+            "update billing",
+            "change billing information",
+            "change billing details"
+        ],
+        "answer": "Please contact our support team to update your billing information."
+    },
+
+    "account access": {
+        "keywords": [
+            "account access",
+            "can't access account",
+            "cannot access account",
+            "account login",
+            "login problem",
+            "can't log in",
+            "cannot log in"
+        ],
+        "answer": "If you are having trouble accessing your account, please contact our support team for assistance."
+},
+
+    "support":{
+        "keywords": [
+            "support", "help"
+        ],
+        "answer" : "Customer support is available during business hours."
+    },
+
+    "website": {
+        "keywords" : [
+            "website", "information", "online", "info"
+        ],
+        "answer":  "Visit our website for more information."
+    },
+     "password reset": {
+        "keywords": [
+            "reset password",
+            "reset my password",
+            "forgot password",
+            "forgot my password",
+            "change password",
+            "change my password",
+            "password reset",
+            "cant remember my password",
+            "cannot remember my password",
+            "new password"
+        ],
+        "answer": "I'm not able to reset passwords directly yet, but I can log a support ticket so our team can help you. Would you like me to do that?",
+        "action": "password_reset"
+    }
+}

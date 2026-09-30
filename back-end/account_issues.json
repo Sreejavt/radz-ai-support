@@ -1,0 +1,16 @@
+{
+  "account_issues": [
+    {
+      "customer_id": "CUS-000004",
+      "issue": "Account locked after multiple failed login attempts",
+      "status": "Open",
+      "created_at": "2026-09-27T08:30:00.000000"
+    },
+    {
+      "customer_id": "CUS-000002",
+      "issue": "Profile email address is outdated and customer can't update it themselves",
+      "status": "Open",
+      "created_at": "2026-09-20T15:00:00.000000"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "customers": [
+    {
+      "customer_id": "CUS-000001",
+      "name": "Priya Nair",
+      "email": "priya.nair@example.com",
+      "phone": "9876500001",
+      "status": "Active",
+      "last_transaction": "2026-09-15",
+      "birthday": "1994-03-12",
+      "important_dates": [
+        { "type": "subscription renewal", "date": "2026-10-15" }
+      ],
+      "details": [],
+      "password": null
+    },
+    {
+      "customer_id": "CUS-000002",
+      "name": "Arjun Menon",
+      "email": "arjun.menon@example.com",
+      "phone": "9876500002",
+      "status": "Inactive",
+      "last_transaction": "2026-05-10",
+      "birthday": "1990-07-22",
+      "important_dates": [],
+      "details": [],
+      "password": null
+    },
+    {
+      "customer_id": "CUS-000003",
+      "name": "Fatima Rahman",
+      "email": "fatima.rahman@example.com",
+      "phone": "9876500003",
+      "status": "Active",
+      "last_transaction": "2026-09-20",
+      "birthday": "1988-11-05",
+      "important_dates": [
+        { "type": "renewal date", "date": "2026-10-03" }
+      ],
+      "details": [],
+      "password": null
+    },
+    {
+      "customer_id": "CUS-000004",
+      "name": "David Chen",
+      "email": "david.chen@example.com",
+      "phone": "9876500004",
+      "status": "Active",
+      "last_transaction": "2026-09-25",
+      "birthday": "1996-01-18",
+      "important_dates": [],
+      "details": [
+        { "type": "follow_up", "date": "2026-10-05", "details": "Follow up on delayed shipment inquiry" }
+      ],
+      "password": null
+    },
+    {
+      "customer_id": "CUS-000005",
+      "name": "Meera Iyer",
+      "email": "meera.iyer@example.com",
+      "phone": "9876500005",
+      "status": "Active",
+      "last_transaction": "2026-09-28",
+      "birthday": "1999-05-30",
+      "important_dates": [],
+      "details": [],
+      "password": null
+    }
+  ]
+}
