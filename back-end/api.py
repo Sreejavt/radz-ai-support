@@ -1194,6 +1194,227 @@ def update_account_issue_status(customer_id, new_status):
 
     return None
 
+# ---------- WhatsApp conversational session state ----------
+whatsapp_sessions = {}
+
+def get_whatsapp_session(phone):
+    if phone not in whatsapp_sessions:
+        whatsapp_sessions[phone] = {
+            "customer_id": None,
+            "customer_name": None,
+            "flow": None,
+            "stage": None,
+            "data": {}
+        }
+    return whatsapp_sessions[phone]
+
+
+def reset_flow(session):
+    session["flow"] = None
+    session["stage"] = None
+    session["data"] = {}
+
+
+IDENTITY_REQUIRED_TRIGGERS = {
+    "raise a ticket": "ticket", "create a ticket": "ticket", "open a ticket": "ticket",
+    "make a complaint": "complaint", "file a complaint": "complaint",
+    "escalate": "escalation",
+    "want a refund": "refund", "request a refund": "refund", "need a refund": "refund",
+    "payment issue": "payment_issue", "payment problem": "payment_issue",
+    "account issue": "account_issue", "account problem": "account_issue", "locked account": "account_issue",
+    "my account details": "account_details",
+    "account status": "account_status",
+}
+
+STATUS_CHECK_TRIGGERS = {
+    "ticket status": "ticket_status",
+    "order status": "order_status",
+    "refund status": "refund_status",
+    "complaint status": "complaint_status",
+    "escalation status": "escalation_status",
+}
+
+
+def handle_whatsapp_text(from_number, text):
+    session = get_whatsapp_session(from_number)
+    lower = text.lower().strip()
+
+    if session["flow"]:
+        return continue_whatsapp_flow(session, text)
+
+    for trigger, kind in STATUS_CHECK_TRIGGERS.items():
+        if trigger in lower:
+            session["flow"] = "status_check"
+            session["stage"] = kind
+            return f"Sure — please share the {kind.replace('_status', '').replace('_', ' ')} ID."
+
+    for trigger, flow in IDENTITY_REQUIRED_TRIGGERS.items():
+        if trigger in lower:
+            session["flow"] = flow
+            if session["customer_id"] and session["customer_name"]:
+                return start_flow_after_identity(session)
+            session["stage"] = "awaiting_id"
+            return "Sure — first, what's your Customer ID (or email/phone)?"
+
+    result = search_question(text)
+    if result["action"] == "password_reset":
+        if not (session["customer_id"] and session["customer_name"]):
+            session["flow"] = "password_reset"
+            session["stage"] = "awaiting_id"
+            return "To reset your password, first tell me your Customer ID (or email/phone)."
+        return do_password_reset(session)
+
+    return result["answer"] or unknown()
+
+
+def continue_whatsapp_flow(session, text):
+    flow = session["flow"]
+    stage = session["stage"]
+    text = text.strip()
+
+    if stage == "awaiting_id":
+        session["data"]["pending_id"] = text
+        session["stage"] = "awaiting_name"
+        return "Thanks. And your full name as on your account?"
+
+    if stage == "awaiting_name":
+        customer = verify_customer_identity(session["data"]["pending_id"], text)
+        if customer is None:
+            session["stage"] = "awaiting_id"
+            return "I couldn't verify those details. Please share your Customer ID again."
+        session["customer_id"] = customer["customer_id"]
+        session["customer_name"] = customer["name"]
+        if flow == "password_reset":
+            return do_password_reset(session)
+        return start_flow_after_identity(session)
+
+    if flow == "status_check":
+        return do_status_check(session, stage, text)
+
+    if flow == "ticket" and stage == "awaiting_issue":
+        ticket = create_ticket(session["customer_id"], session["customer_name"], text)
+        reset_flow(session)
+        return f"Your ticket {ticket['ticket_id']} has been created successfully."
+
+    if flow == "complaint" and stage == "awaiting_complaint":
+        complaint = create_complaint(session["customer_id"], session["customer_name"], text)
+        reset_flow(session)
+        return f"Your complaint {complaint['complaint_id']} has been filed successfully."
+
+    if flow == "escalation" and stage == "awaiting_reason":
+        escalation = create_escalation(session["customer_id"], session["customer_name"], "Customer support issue", text)
+        reset_flow(session)
+        return f"Your escalation {escalation['escalation_id']} has been raised successfully."
+
+    if flow == "refund" and stage == "awaiting_order":
+        transaction = get_transaction(text)
+        if transaction is None or transaction["customer_id"] != session["customer_id"]:
+            return "I couldn't verify that order for your account. Please share the correct order ID."
+        session["data"]["order_id"] = text
+        session["stage"] = "awaiting_reason"
+        return "Got it. What's the reason for the refund?"
+
+    if flow == "refund" and stage == "awaiting_reason":
+        session["data"]["reason"] = text
+        session["stage"] = "awaiting_amount"
+        return "And the refund amount?"
+
+    if flow == "refund" and stage == "awaiting_amount":
+        try:
+            amount = float(text)
+        except ValueError:
+            return "Please enter a valid number for the amount."
+        result = create_refund(session["customer_id"], session["data"]["order_id"], session["data"]["reason"], amount)
+        reset_flow(session)
+        if "error" in result:
+            return result["error"]
+        return f"Your refund request for order {result['order_id']} has been created successfully."
+
+    if flow == "payment_issue" and stage == "awaiting_order":
+        session["data"]["order_id"] = text
+        session["stage"] = "awaiting_description"
+        return "Thanks. Briefly describe what happened with the payment."
+
+    if flow == "payment_issue" and stage == "awaiting_description":
+        issue_text = f"Payment issue for order {session['data']['order_id']}: {text}"
+        ticket = create_ticket(session["customer_id"], session["customer_name"], issue_text)
+        reset_flow(session)
+        return f"I've created ticket {ticket['ticket_id']} for your payment issue. A representative will follow up."
+
+    if flow == "account_issue" and stage == "awaiting_issue":
+        create_account_issue(session["customer_id"], text)
+        reset_flow(session)
+        return "Your account issue has been recorded. A support representative will assist you shortly."
+
+    reset_flow(session)
+    return unknown()
+
+
+def start_flow_after_identity(session):
+    flow = session["flow"]
+
+    if flow == "ticket":
+        session["stage"] = "awaiting_issue"
+        return "Please describe the issue you'd like to report."
+    if flow == "complaint":
+        session["stage"] = "awaiting_complaint"
+        return "Please describe your complaint."
+    if flow == "escalation":
+        session["stage"] = "awaiting_reason"
+        return "Please tell me why you'd like to escalate this issue."
+    if flow == "refund":
+        session["stage"] = "awaiting_order"
+        return "Please provide the order ID for the refund."
+    if flow == "payment_issue":
+        session["stage"] = "awaiting_order"
+        return "Could you provide the order ID related to the payment issue, if you have one?"
+    if flow == "account_issue":
+        session["stage"] = "awaiting_issue"
+        return "Please describe the account issue."
+    if flow == "account_details":
+        customer = find_customer(session["customer_id"])
+        history = get_customer_history(session["customer_id"])
+        reset_flow(session)
+        lines = "\n".join(f"- {h['event_date']}: {h['details']}" for h in history[-5:]) or "No history on file yet."
+        return (f"Name: {customer['name']}\nEmail: {customer['email']}\nStatus: {customer['status']}\n"
+                f"Last transaction: {customer['last_transaction']}\n\nRecent history:\n{lines}")
+    if flow == "account_status":
+        customer = find_customer(session["customer_id"])
+        reset_flow(session)
+        return f"Your account status is: {customer['status']}."
+
+    reset_flow(session)
+    return unknown()
+
+
+def do_password_reset(session):
+    reset = create_password_reset(session["customer_id"])
+    reset_link = f"{frontend_base_url}/reset-password?token={reset['token']}"
+    add_customer_history(session["customer_id"], "password_reset_requested",
+                          f"Password reset link generated (expires {reset['expires_at']}).", date.today().isoformat())
+    reset_flow(session)
+    return f"I've verified your identity. Here is your password reset link (valid for 15 minutes): {reset_link}"
+
+
+def do_status_check(session, kind, identifier):
+    reset_flow(session)
+    if kind == "ticket_status":
+        t = get_ticket(identifier)
+        return f"Ticket {t['ticket_id']} — status: {t['status']}. Issue: {t['issue']}" if t else "I couldn't find that ticket."
+    if kind == "order_status":
+        t = get_transaction(identifier)
+        return f"Order {t['order_id']} — status: {t['status']}, amount: {t['amount']}." if t else "I couldn't find that order."
+    if kind == "refund_status":
+        r = get_refund(identifier)
+        return f"Refund for order {r['order_id']} — status: {r['status']}, amount: {r['amount']}." if r else "I couldn't find a refund for that order."
+    if kind == "complaint_status":
+        c = get_complaint(identifier)
+        return f"Complaint {c['complaint_id']} — status: {c['status']}." if c else "I couldn't find that complaint."
+    if kind == "escalation_status":
+        e = get_escalation(identifier)
+        return f"Escalation {e['escalation_id']} — status: {e['status']}." if e else "I couldn't find that escalation."
+    return unknown()
+
 
 @app.get("/welcome")
 def get_welcome():
@@ -1708,6 +1929,7 @@ def verify_whatsapp_webhook(request: Request):
 
     return PlainTextResponse(content="Verification failed", status_code=403)
 
+
 @app.post("/whatsapp/webhook")
 async def receive_whatsapp_message(request: Request):
     data = await request.json()
@@ -1722,9 +1944,7 @@ async def receive_whatsapp_message(request: Request):
             from_number = message["from"]
             text = message["text"]["body"]
 
-            result = search_question(text)
-            answer = result["answer"] or unknown()
-
+            answer = handle_whatsapp_text(from_number, text)
             send_whatsapp_message(from_number, answer)
 
     except (KeyError, IndexError):
