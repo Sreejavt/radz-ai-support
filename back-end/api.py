@@ -58,6 +58,8 @@ def send_whatsapp_message(to, message_text):
         "text": {"body": message_text}
     }
     response = requests.post(url, headers=headers, json=payload)
+    print("WHATSAPP SEND STATUS:", response.status_code)
+    print("WHATSAPP SEND RESPONSE:", response.text)
     return response.json()
 
 
