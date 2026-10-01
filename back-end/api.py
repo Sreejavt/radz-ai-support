@@ -3,6 +3,7 @@ import os
 import uuid
 import hashlib
 import secrets
+import requests
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv 
@@ -14,9 +15,16 @@ from config import frontend_base_url
 from email_service import send_email
 from responses import welcome, goodbye, unknown
 from datetime import datetime, date, timedelta
+from fastapi import Request
+from fastapi.responses import PlainTextResponse
 
 
 app = FastAPI()
+
+META_ACCESS_TOKEN = os.environ.get("META_ACCESS_TOKEN")
+META_PHONE_NUMBER_ID = os.environ.get("META_PHONE_NUMBER_ID")
+META_VERIFY_TOKEN = os.environ.get("META_VERIFY_TOKEN")
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -35,6 +43,23 @@ HELP_CENTRE_FILE = os.path.join(
 
 with open(HELP_CENTRE_FILE, "r", encoding="utf-8") as f:
     help_centre_docs = json.load(f)
+
+
+def send_whatsapp_message(to, message_text):
+    url = f"https://graph.facebook.com/v21.0/{META_PHONE_NUMBER_ID}/messages"
+    headers = {
+        "Authorization": f"Bearer {META_ACCESS_TOKEN}",
+        "Content-Type": "application/json"
+    }
+    payload = {
+        "messaging_product": "whatsapp",
+        "to": to,
+        "type": "text",
+        "text": {"body": message_text}
+    }
+    response = requests.post(url, headers=headers, json=payload)
+    return response.json()
+
 
 def create_ticket(customer_id, customer_name, issue):
     ticket_id = "TKT-" + str(uuid.uuid4())[:8].upper()
@@ -1670,6 +1695,42 @@ def update_account_issue_status_endpoint(
 @app.get("/help-centre")
 def get_help_centre():
     return help_centre_docs
+
+
+@app.get("/whatsapp/webhook")
+def verify_whatsapp_webhook(request: Request):
+    mode = request.query_params.get("hub.mode")
+    token = request.query_params.get("hub.verify_token")
+    challenge = request.query_params.get("hub.challenge")
+
+    if mode == "subscribe" and token == META_VERIFY_TOKEN:
+        return PlainTextResponse(content=challenge)
+
+    return PlainTextResponse(content="Verification failed", status_code=403)
+
+@app.post("/whatsapp/webhook")
+async def receive_whatsapp_message(request: Request):
+    data = await request.json()
+
+    try:
+        entry = data["entry"][0]
+        changes = entry["changes"][0]
+        value = changes["value"]
+
+        if "messages" in value:
+            message = value["messages"][0]
+            from_number = message["from"]
+            text = message["text"]["body"]
+
+            result = search_question(text)
+            answer = result["answer"] or unknown()
+
+            send_whatsapp_message(from_number, answer)
+
+    except (KeyError, IndexError):
+        pass
+
+    return {"status": "received"}
 
 
 @app.post("/ask")
